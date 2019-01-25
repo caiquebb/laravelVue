@@ -3,20 +3,30 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+        <div class="col-md-10 col-md-offset-1">
+            <vue-panel title="Dashboard">
+                Content Test
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                <div class="row">
+                    <div class="col-md-4">
+                        <vue-panel title="Content 1">
+                            Child Panel Test
+                        </vue-panel>
+                    </div>
 
-                    You are logged in!
+                    <div class="col-md-4">
+                        <vue-panel title="Content 2">
+                            Child Panel Test 2
+                        </vue-panel>
+                    </div>
+
+                    <div class="col-md-4">
+                        <vue-panel title="Content 3">
+                            Child Panel Test 3
+                        </vue-panel>
+                    </div>
                 </div>
-            </div>
+            </vue-panel>
         </div>
     </div>
 </div>

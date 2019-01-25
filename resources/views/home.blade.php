@@ -9,9 +9,9 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <vue-panel title="Content 1" color="blue">
+                        <vue-box title="Content 1" color="blue">
                             Child Panel Test
-                        </vue-panel>
+                        </vue-box>
                     </div>
 
                     <div class="col-md-4">

@@ -3,6 +3,7 @@
 @section('content')
 <vue-page size="12">
     <vue-panel title="Article List">
+        <vue-breadcrumbs :links="{{$breadcrumbs}}"></vue-breadcrumbs>
         <vue-list-table
             :titles="[ '#', 'Title', 'Description' ]"
             :items="[ [ 1, 'PHP OO', 'PHP OO course' ],  [ 2, 'Vue JS', 'Vue JS Course' ] ]"

@@ -23,6 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $breadcrumbs = json_encode([
+            [
+                'title' => 'Home',
+                'url' => ''
+            ]
+        ]);
+
+        return view('home', compact('breadcrumbs'));
     }
 }

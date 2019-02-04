@@ -3,7 +3,7 @@
 @section('content')
 <vue-page size="10">
     <vue-panel title="Dashboard">
-        Content Test
+        <vue-breadcrumbs :links="{{$breadcrumbs}}"></vue-breadcrumbs>
 
         <div class="row">
             <div class="col-md-4">

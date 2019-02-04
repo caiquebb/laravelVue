@@ -11,7 +11,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th :key="title" v-for="title in titles">{{ title }}</th>
+                    <th style="cursor:pointer" :key="title" v-for="(title, index) in titles" @click="sortColumn(index)">{{ title }}</th>
                     <th v-if="showUrl || editUrl || deleteUrl">Action</th>
                 </tr>
             </thead>
@@ -44,14 +44,44 @@
     export default {
         data: function() {
             return {
-                search: ''
+                search: '',
+                sortData: this.sort || 'asc',
+                sortColData: this.sortCol || 0
             }
         },
 
-        props: [ 'titles', 'items', 'createUrl', 'showUrl', 'editUrl', 'deleteUrl', 'csrfToekn' ],
+        props: [ 'titles', 'items', 'createUrl', 'showUrl', 'editUrl', 'deleteUrl', 'csrfToekn', 'sort', 'sortCol' ],
 
         computed: {
             list: function() {
+
+                let sort = this.sortData;
+                let sortCol = this.sortColData;
+
+                sort = sort.toLowerCase();
+                sortCol = parseInt(sortCol);
+                
+                if (sort == 'desc') {
+                    this.items.sort(function (a, b) {
+                        if (a[sortCol] < b[sortCol]) {
+                            return 1;
+                        } else if (a[sortCol] > b[sortCol]) {
+                            return -1;
+                        }
+    
+                        return 0;
+                    });
+                } else {
+                    this.items.sort(function (a, b) {
+                        if (a[sortCol] > b[sortCol]) {
+                            return 1;
+                        } else if (a[sortCol] < b[sortCol]) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
+
                 return this.items.filter(res => {
                     for (let i = 0; i < res.length; i++) {
                         if ((res[i] + '').toLowerCase().indexOf(this.search.toLowerCase()) >= 0) {
@@ -67,6 +97,16 @@
         methods: {
             submitDeleteForm: function(index) {
                 document.getElementById(index).submit();
+            },
+
+            sortColumn: function (column) {
+                this.sortColData = column;
+
+                if (this.sortData.toLowerCase() == 'asc') {
+                    this.sortData = 'desc';
+                } else {
+                    this.sortData = 'asc';
+                }
             }
         }
     }

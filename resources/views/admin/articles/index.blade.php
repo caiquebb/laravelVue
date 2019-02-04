@@ -6,6 +6,8 @@
         <vue-list-table
             :titles="[ '#', 'Title', 'Description' ]"
             :items="[ [ 1, 'PHP OO', 'PHP OO course' ],  [ 2, 'Vue JS', 'Vue JS Course' ] ]"
+            sort="asc"
+            sort-col="2"
             create-url="#create"
             show-url="#show"
             edit-url="#edit"

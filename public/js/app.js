@@ -44357,15 +44357,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            search: ''
+            search: '',
+            sortData: this.sort || 'asc',
+            sortColData: this.sortCol || 0
         };
     },
 
-    props: ['titles', 'items', 'createUrl', 'showUrl', 'editUrl', 'deleteUrl', 'csrfToekn'],
+    props: ['titles', 'items', 'createUrl', 'showUrl', 'editUrl', 'deleteUrl', 'csrfToekn', 'sort', 'sortCol'],
 
     computed: {
         list: function list() {
             var _this = this;
+
+            var sort = this.sortData;
+            var sortCol = this.sortColData;
+
+            sort = sort.toLowerCase();
+            sortCol = parseInt(sortCol);
+
+            if (sort == 'desc') {
+                this.items.sort(function (a, b) {
+                    if (a[sortCol] < b[sortCol]) {
+                        return 1;
+                    } else if (a[sortCol] > b[sortCol]) {
+                        return -1;
+                    }
+
+                    return 0;
+                });
+            } else {
+                this.items.sort(function (a, b) {
+                    if (a[sortCol] > b[sortCol]) {
+                        return 1;
+                    } else if (a[sortCol] < b[sortCol]) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            }
 
             return this.items.filter(function (res) {
                 for (var i = 0; i < res.length; i++) {
@@ -44382,6 +44411,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         submitDeleteForm: function submitDeleteForm(index) {
             document.getElementById(index).submit();
+        },
+
+        sortColumn: function sortColumn(column) {
+            this.sortColData = column;
+
+            if (this.sortData.toLowerCase() == 'asc') {
+                this.sortData = 'desc';
+            } else {
+                this.sortData = 'asc';
+            }
         }
     }
 });
@@ -44430,8 +44469,20 @@ var render = function() {
         _c(
           "tr",
           [
-            _vm._l(_vm.titles, function(title) {
-              return _c("th", { key: title }, [_vm._v(_vm._s(title))])
+            _vm._l(_vm.titles, function(title, index) {
+              return _c(
+                "th",
+                {
+                  key: title,
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      _vm.sortColumn(index)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(title))]
+              )
             }),
             _vm._v(" "),
             _vm.showUrl || _vm.editUrl || _vm.deleteUrl

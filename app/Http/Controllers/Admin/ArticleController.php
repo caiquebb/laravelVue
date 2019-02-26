@@ -51,6 +51,17 @@ class ArticleController extends Controller
     {
         $attributes = $request->all();
 
+        $validate = \Validator::make($attributes, [
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+            'publish_datetime' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+
         Article::create($attributes);
 
         return redirect()->back();

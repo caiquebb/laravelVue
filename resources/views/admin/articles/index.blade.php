@@ -2,6 +2,15 @@
 
 @section('content')
 <vue-page size="12">
+    @if ($errors->all())
+        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @foreach ($errors->all() as $error)
+                <p><strong>{{ $error }}</strong></p>
+            @endforeach
+        </div>
+    @endif
+
     <vue-panel title="Article List">
         <vue-breadcrumbs :links="{{$breadcrumbs}}"></vue-breadcrumbs>
         
@@ -24,22 +33,22 @@
     <vue-form id="createForm" css="" action="{{ route('articles.store') }}" method="post" enctype="" csrf-token="{{ csrf_token() }}">
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" name="title" type="text" class="form-control" placeholder="Title">
+            <input id="title" name="title" type="text" class="form-control" placeholder="Title" value="{{ old('title') }}">
         </div>
         
         <div class="form-group">
             <label for="description">Description</label>
-            <input id="description" name="description" type="text" class="form-control" placeholder="Description">
+            <input id="description" name="description" type="text" class="form-control" placeholder="Description" value="{{ old('description') }}">
         </div>
         
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea id="content" name="content" class="form-control"></textarea>
+            <textarea id="content" name="content" class="form-control">{{ old('content') }}</textarea>
         </div>
         
         <div class="form-group">
             <label for="publish_datetime">Publish</label>
-            <input id="publish_datetime" name="publish_datetime" type="datetime-local" class="form-control">
+            <input id="publish_datetime" name="publish_datetime" type="datetime-local" class="form-control" value="{{ old('publish_datetime') }}">
         </div>
     </vue-form>
 

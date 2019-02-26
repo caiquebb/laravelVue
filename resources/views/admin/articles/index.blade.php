@@ -21,7 +21,7 @@
             sort="asc"
             sort-col="2"
             create-url="#create"
-            show-url="#show"
+            show-url="/admin/articles/"
             edit-url="#edit"
             delete-url="#delete"
             csrf-toekn="1234567890987654">
@@ -59,6 +59,7 @@
 
 <vue-modal-content id="showModal" :title="$store.state.item.title">
     <p>@{{$store.state.item.description}}</p>
+    <p>@{{$store.state.item.content}}</p>
 </vue-modal-content>
 
 <vue-modal-content id="editModal" title="Edit">

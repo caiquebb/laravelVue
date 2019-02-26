@@ -75,7 +75,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        return Article::find($id);
     }
 
     /**

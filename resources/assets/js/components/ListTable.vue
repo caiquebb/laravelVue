@@ -26,8 +26,8 @@
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" :value="csrfToekn">
                             
-                            <span v-if="editUrl">
-                                <vue-modal-button v-if="modal" :item="item" type="link" title="Show |" target="showModal"></vue-modal-button>
+                            <span v-if="showUrl">
+                                <vue-modal-button v-if="modal" :item="item" :url="showUrl" type="link" title="Show |" target="showModal"></vue-modal-button>
                                 <a v-else :href="showUrl">Show |</a>
                             </span>
 
@@ -40,8 +40,8 @@
                         </form>
 
                         <span v-else>
-                            <span v-if="editUrl">
-                                <vue-modal-button v-if="modal" :item="item" type="link" title="Show |" target="showModal"></vue-modal-button>
+                            <span v-if="showUrl">
+                                <vue-modal-button v-if="modal" :item="item" :url="showUrl" type="link" title="Show |" target="showModal"></vue-modal-button>
                                 <a v-else :href="showUrl">Show |</a>
                             </span>
                             <span v-if="editUrl">

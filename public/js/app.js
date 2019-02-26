@@ -45610,7 +45610,7 @@ var render = function() {
                               domProps: { value: _vm.csrfToekn }
                             }),
                             _vm._v(" "),
-                            _vm.editUrl
+                            _vm.showUrl
                               ? _c(
                                   "span",
                                   [
@@ -45618,6 +45618,7 @@ var render = function() {
                                       ? _c("vue-modal-button", {
                                           attrs: {
                                             item: item,
+                                            url: _vm.showUrl,
                                             type: "link",
                                             title: "Show |",
                                             target: "showModal"
@@ -45673,7 +45674,7 @@ var render = function() {
                           ]
                         )
                       : _c("span", [
-                          _vm.editUrl
+                          _vm.showUrl
                             ? _c(
                                 "span",
                                 [
@@ -45681,6 +45682,7 @@ var render = function() {
                                     ? _c("vue-modal-button", {
                                         attrs: {
                                           item: item,
+                                          url: _vm.showUrl,
                                           type: "link",
                                           title: "Show |",
                                           target: "showModal"
@@ -46078,10 +46080,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['type', 'target', 'title', 'css', 'item'],
+    props: ['type', 'target', 'title', 'css', 'item', 'url'],
     methods: {
         fillForm: function fillForm() {
-            this.$store.commit('setItem', this.item);
+            var _this = this;
+
+            axios.get(this.url + this.item.id).then(function (res) {
+                _this.$store.commit('setItem', res.data);
+            });
         }
     }
 });

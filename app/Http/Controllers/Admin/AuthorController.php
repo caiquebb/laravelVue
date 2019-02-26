@@ -22,12 +22,12 @@ class AuthorController extends Controller
                 'url' => route('home')
             ],
             [
-                'title' => 'Users',
+                'title' => 'Authors',
                 'url' => ''
             ]
         ]);
 
-        $list = User::select('id', 'name', 'email')->paginate(5);
+        $list = User::select('id', 'name', 'email')->where('author', 'S')->paginate(5);
 
         return view('admin.authors.index', compact('breadcrumbs', 'list'));
     }

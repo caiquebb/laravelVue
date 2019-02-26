@@ -22,9 +22,7 @@
             sort-col="2"
             create-url="#create"
             show-url="/admin/authors/"
-            edit-url="/admin/authors/"
-            delete-url="/admin/authors/"
-            csrf-toekn="{{ csrf_token() }}">
+            edit-url="/admin/authors/" >
         </vue-list-table>
 
         <div align="center">
@@ -43,6 +41,14 @@
         <div class="form-group">
             <label for="email">e-mail</label>
             <input id="email" name="email" type="email" class="form-control" placeholder="e-mail" value="{{ old('email') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="author">Author</label>
+            <select name="author" id="author" class="form-control">
+                <option {{ old('author') && old('author') == 'S' ? 'selected' : '' }} value="S">Sim</option>
+                <option {{ old('author') && old('author') == 'N' ? 'selected' : '' }} value="N">Não</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -70,6 +76,14 @@
         <div class="form-group">
             <label for="email">e-mail</label>
             <input id="email" name="email" type="email" class="form-control" v-model="$store.state.item.email" placeholder="e-mail">
+        </div>
+
+        <div class="form-group">
+            <label for="author">Author</label>
+            <select name="author" id="author" class="form-control" v-model="$store.state.item.author">
+                <option value="N">Não</option>
+                <option value="S">Sim</option>
+            </select>
         </div>
         
         <div class="form-group">

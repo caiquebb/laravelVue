@@ -27,7 +27,7 @@ class UserController extends Controller
             ]
         ]);
 
-        $list = User::select('id', 'name', 'email')->paginate(2);
+        $list = User::select('id', 'name', 'email')->paginate(5);
 
         return view('admin.users.index', compact('breadcrumbs', 'list'));
     }

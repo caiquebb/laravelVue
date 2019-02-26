@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\User;
 
@@ -101,11 +102,35 @@ class UserController extends Controller
     {
         $attributes = $request->all();
 
-        $validate = \Validator::make($attributes, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+        if (!empty($attributes['password'])) {
+            $validate = \Validator::make($attributes, [
+                'name' => 'required|string|max:255',
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique('users')->ignore($id),
+                ],
+                'password' => 'required|string|min:6',
+            ]);
+            
+            $attributes['password'] = bcrypt($attributes['password']);
+        } else {
+            $validate = \Validator::make($attributes, [
+                'name' => 'required|string|max:255',
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique('users')->ignore($id),
+                ],
+            ]);
+
+            unset($attributes['password']);
+        }
+
 
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate)->withInput();

@@ -15,7 +15,7 @@
         <vue-breadcrumbs :links="{{$breadcrumbs}}"></vue-breadcrumbs>
         
         <vue-list-table
-            :titles="[ '#', 'Title', 'Description', 'Publish' ]"
+            :titles="[ '#', 'Title', 'Description', 'Author', 'Publish' ]"
             :items="{{ json_encode($articles) }}"
             :modal="true"
             sort="asc"

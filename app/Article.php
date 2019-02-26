@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\User;
 
 class Article extends Model
 {
@@ -19,6 +18,21 @@ class Article extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+    }
+
+    public static function listArticles($perPage)
+    {
+        return self::select(
+            'articles.id',
+            'articles.title',
+            'articles.description',
+            'users.name',
+            'articles.publish_datetime'
+        )->join(
+            'users',
+            'users.id',
+            '=',
+            'articles.user_id'
+        )->paginate($perPage);
     }
 }

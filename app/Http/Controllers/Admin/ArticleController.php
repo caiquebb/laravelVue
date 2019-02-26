@@ -26,7 +26,7 @@ class ArticleController extends Controller
             ]
         ]);
 
-        $articles = json_encode(Article::select('id', 'title', 'description', 'publish_datetime')->get());
+        $articles = Article::select('id', 'title', 'description', 'publish_datetime')->paginate(2);
 
         return view('admin.articles.index', compact('breadcrumbs', 'articles'));
     }

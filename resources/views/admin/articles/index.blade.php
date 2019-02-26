@@ -16,7 +16,7 @@
         
         <vue-list-table
             :titles="[ '#', 'Title', 'Description', 'Publish' ]"
-            :items="{{ $articles }}"
+            :items="{{ json_encode($articles) }}"
             :modal="true"
             sort="asc"
             sort-col="2"
@@ -26,6 +26,10 @@
             delete-url="/admin/articles/"
             csrf-toekn="{{ csrf_token() }}">
         </vue-list-table>
+
+        <div align="center">
+            {{ $articles }}
+        </div>
     </vue-panel>
 </vue-page>
 

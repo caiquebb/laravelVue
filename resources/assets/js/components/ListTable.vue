@@ -71,7 +71,7 @@
 
         computed: {
             list: function() {
-
+                let list = this.items.data;
                 let sort = this.sortData;
                 let sortCol = this.sortColData;
 
@@ -79,7 +79,7 @@
                 sortCol = parseInt(sortCol);
                 
                 if (sort == 'desc') {
-                    this.items.sort(function (a, b) {
+                    list.sort(function (a, b) {
                         if (Object.values(a)[sortCol] < Object.values(b)[sortCol]) {
                             return 1;
                         } else if (Object.values(a)[sortCol] > Object.values(b)[sortCol]) {
@@ -89,7 +89,7 @@
                         return 0;
                     });
                 } else {
-                    this.items.sort(function (a, b) {
+                    list.sort(function (a, b) {
                         if (Object.values(a)[sortCol] > Object.values(b)[sortCol]) {
                             return 1;
                         } else if (Object.values(a)[sortCol] < Object.values(b)[sortCol]) {
@@ -100,7 +100,7 @@
                 }
 
                 if (this.search) {
-                    return this.items.filter(res => {
+                    return list.filter(res => {
                         res = Object.values(res);
                         
                         for (let i = 0; i < res.length; i++) {
@@ -113,7 +113,7 @@
                     });
                 }
 
-                return this.items;
+                return list;
             }
         },
 

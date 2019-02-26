@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Article;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -30,6 +32,12 @@ class HomeController extends Controller
             ]
         ]);
 
-        return view('home', compact('breadcrumbs'));
+        $totals = [
+            'articles' => Article::count(),
+            'users' => User::count(),
+            'authors' => User::where('author', 'S')->count()
+        ];
+
+        return view('home', compact('breadcrumbs', 'totals'));
     }
 }

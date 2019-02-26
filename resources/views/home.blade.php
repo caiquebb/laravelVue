@@ -15,7 +15,7 @@
             </div>
             
             <div class="col-md-4">
-                <vue-box amount="3" title="Authors" url="#" color="red" icon="ion ion-person"></vue-box>
+                <vue-box amount="3" title="Authors" url="{{ route('authors.index') }}" color="red" icon="ion ion-person"></vue-box>
             </div>
         </div>
     </vue-panel>

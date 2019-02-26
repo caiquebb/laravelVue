@@ -18,8 +18,8 @@
             :titles="[ '#', 'Title', 'Description', 'Author', 'Publish' ]"
             :items="{{ json_encode($articles) }}"
             :modal="true"
-            sort="asc"
-            sort-col="2"
+            sort="desc"
+            sort-col="0"
             create-url="#create"
             show-url="/admin/articles/"
             edit-url="/admin/articles/"
@@ -46,8 +46,18 @@
         </div>
         
         <div class="form-group">
-            <label for="content">Content</label>
-            <textarea id="content" name="content" class="form-control">{{ old('content') }}</textarea>
+            <label for="addContent">Content</label>
+            <vue-ckeditor
+                id="addContent"
+                name="content"
+                value="{{ old('content') }}" 
+                :config="{
+                    toolbar: [
+                        [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ]
+                    ],
+                    height: 300
+                }">
+            </vue-ckeditor>
         </div>
         
         <div class="form-group">
@@ -79,9 +89,19 @@
         </div>
         
         <div class="form-group">
-            <label for="content">Content</label>
-            <textarea id="content" name="content" class="form-control" v-model="$store.state.item.content"></textarea>
-        </div>
+                <label for="editContent">Content</label>
+                <vue-ckeditor
+                    id="editContent"
+                    name="content"
+                    v-model="$store.state.item.content"
+                    :config="{
+                        toolbar: [
+                            [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ]
+                        ],
+                        height: 300
+                    }">
+                </vue-ckeditor>
+            </div>
         
         <div class="form-group">
             <label for="publish_datetime">Publish</label>

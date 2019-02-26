@@ -42,8 +42,13 @@ Vue.component('vue-modal-content', require('./components/modal/Content.vue'));
 Vue.component('vue-modal-button', require('./components/modal/Button.vue'));
 Vue.component('vue-form', require('./components/Form.vue'));
 
+import VueCkeditor from 'vue-ckeditor2';
+
 const app = new Vue({
     el: '#app',
+    components: {
+        VueCkeditor
+    },
     store,
     mounted: function () {
         document.getElementById('app').style.display = "block";

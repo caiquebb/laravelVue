@@ -50,6 +50,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

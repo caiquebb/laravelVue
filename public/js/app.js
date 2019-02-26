@@ -45642,6 +45642,7 @@ var render = function() {
                                       ? _c("vue-modal-button", {
                                           attrs: {
                                             item: item,
+                                            url: _vm.editUrl,
                                             type: "link",
                                             title: "Edit |",
                                             target: "editModal"
@@ -45705,6 +45706,8 @@ var render = function() {
                                   _vm.modal
                                     ? _c("vue-modal-button", {
                                         attrs: {
+                                          item: item,
+                                          url: _vm.editUrl,
                                           type: "link",
                                           title: "Edit |",
                                           target: "editModal"

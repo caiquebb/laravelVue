@@ -32,7 +32,7 @@
                             </span>
 
                             <span v-if="editUrl">
-                                <vue-modal-button v-if="modal" :item="item" type="link" title="Edit |" target="editModal"></vue-modal-button>
+                                <vue-modal-button v-if="modal" :item="item" :url="editUrl" type="link" title="Edit |" target="editModal"></vue-modal-button>
                                 <a v-else :href="editUrl">Edit |</a>
                             </span>
                             
@@ -45,7 +45,7 @@
                                 <a v-else :href="showUrl">Show |</a>
                             </span>
                             <span v-if="editUrl">
-                                <vue-modal-button v-if="modal" type="link" title="Edit |" target="editModal"></vue-modal-button>
+                                <vue-modal-button v-if="modal" :item="item" :url="editUrl" type="link" title="Edit |" target="editModal"></vue-modal-button>
                                 <a v-else :href="editUrl">Edit |</a>
                             </span>
                             <a v-if="deleteUrl" :href="deleteUrl">Delete</a>

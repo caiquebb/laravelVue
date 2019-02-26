@@ -22,7 +22,7 @@
             sort-col="2"
             create-url="#create"
             show-url="/admin/articles/"
-            edit-url="#edit"
+            edit-url="/admin/articles/"
             delete-url="#delete"
             csrf-toekn="1234567890987654">
         </vue-list-table>
@@ -63,7 +63,7 @@
 </vue-modal-content>
 
 <vue-modal-content id="editModal" title="Edit">
-    <vue-form id="editForm" css="" action="#" method="post" enctype="multpart/form-data" csrf-token="12345">
+    <vue-form id="editForm" css="" :action="`/admin/articles/${$store.state.item.id}`" method="put" enctype="" csrf-token="{{ csrf_token() }}">
         <div class="form-group">
             <label for="title">Title</label>
             <input id="title" name="title" type="text" class="form-control" v-model="$store.state.item.title" placeholder="Title">
@@ -72,6 +72,16 @@
         <div class="form-group">
             <label for="description">Description</label>
             <input id="description" name="description" type="text" class="form-control" v-model="$store.state.item.description" placeholder="Description">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" class="form-control" v-model="$store.state.item.content"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="publish_datetime">Publish</label>
+            <input id="publish_datetime" name="publish_datetime" type="datetime-local" class="form-control" v-model="$store.state.item.publish_datetime">
         </div>
     </vue-form>
 

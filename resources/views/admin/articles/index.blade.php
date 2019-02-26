@@ -4,12 +4,11 @@
 <vue-page size="12">
     <vue-panel title="Article List">
         <vue-breadcrumbs :links="{{$breadcrumbs}}"></vue-breadcrumbs>
-
-        <vue-modal-button type="button" title="My Modal" target="MyModal"></vue-modal-button>
         
         <vue-list-table
-            :titles="[ '#', 'Title', 'Description' ]"
-            :items="[ [ 1, 'PHP OO', 'PHP OO course' ],  [ 2, 'Vue JS', 'Vue JS Course' ] ]"
+            :titles="[ '#', 'Title', 'Description', 'Publish' ]"
+            :items="{{ $articles }}"
+            :modal="true"
             sort="asc"
             sort-col="2"
             create-url="#create"
@@ -21,29 +20,53 @@
     </vue-panel>
 </vue-page>
 
-<vue-modal-content id="MyModal">
-    <vue-panel title="My Form">
-        <form>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile">
-                <p class="help-block">Example block-level help text here.</p>
-            </div>
-            <div class="checkbox">
-                <label>
-                <input type="checkbox"> Check me out
-                </label>
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </vue-panel>
+<vue-modal-content id="createModal" title="Create">
+    <vue-form id="createForm" css="" action="{{ route('articles.store') }}" method="post" enctype="" csrf-token="{{ csrf_token() }}">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" class="form-control" placeholder="Title">
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input id="description" name="description" type="text" class="form-control" placeholder="Description">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" class="form-control"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="publish_datetime">Publish</label>
+            <input id="publish_datetime" name="publish_datetime" type="datetime-local" class="form-control">
+        </div>
+    </vue-form>
+
+    <span slot="footer">
+        <button form="createForm" class="btn btn-info">Add</button>
+    </span>
+</vue-modal-content>
+
+<vue-modal-content id="showModal" :title="$store.state.item.title">
+    <p>@{{$store.state.item.description}}</p>
+</vue-modal-content>
+
+<vue-modal-content id="editModal" title="Edit">
+    <vue-form id="editForm" css="" action="#" method="post" enctype="multpart/form-data" csrf-token="12345">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" class="form-control" v-model="$store.state.item.title" placeholder="Title">
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input id="description" name="description" type="text" class="form-control" v-model="$store.state.item.description" placeholder="Description">
+        </div>
+    </vue-form>
+
+    <span slot="footer">
+        <button form="editForm" class="btn btn-info">Update</button>
+    </span>
 </vue-modal-content>
 @endsection

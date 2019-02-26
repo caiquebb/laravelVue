@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="form-inline">
-            <a v-if="createUrl" :href="createUrl">Create</a>
+            <span v-if="createUrl">
+                <vue-modal-button v-if="modal" type="link" title="Create" target="createModal"></vue-modal-button>
+                <a v-else :href="createUrl">Create</a>
+            </span>
 
             <div class="form-group pull-right">
                 <input type="search" placeholder="Search" class="form-control" v-model="search">
@@ -23,14 +26,28 @@
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" :value="csrfToekn">
                             
-                            <a v-if="showUrl" :href="showUrl">Show |</a>
-                            <a v-if="editUrl" :href="editUrl">Edit |</a>
+                            <span v-if="editUrl">
+                                <vue-modal-button v-if="modal" :item="item" type="link" title="Show |" target="showModal"></vue-modal-button>
+                                <a v-else :href="showUrl">Show |</a>
+                            </span>
+
+                            <span v-if="editUrl">
+                                <vue-modal-button v-if="modal" :item="item" type="link" title="Edit |" target="editModal"></vue-modal-button>
+                                <a v-else :href="editUrl">Edit |</a>
+                            </span>
+                            
                             <a v-if="deleteUrl" href="#" @click="submitDeleteForm(index)">Delete</a>
                         </form>
 
                         <span v-else>
-                            <a v-if="showUrl" :href="showUrl">Show |</a>
-                            <a v-if="editUrl" :href="editUrl">Edit |</a>
+                            <span v-if="editUrl">
+                                <vue-modal-button v-if="modal" :item="item" type="link" title="Show |" target="showModal"></vue-modal-button>
+                                <a v-else :href="showUrl">Show |</a>
+                            </span>
+                            <span v-if="editUrl">
+                                <vue-modal-button v-if="modal" type="link" title="Edit |" target="editModal"></vue-modal-button>
+                                <a v-else :href="editUrl">Edit |</a>
+                            </span>
                             <a v-if="deleteUrl" :href="deleteUrl">Delete</a>
                         </span>
                     </td>
@@ -50,7 +67,7 @@
             }
         },
 
-        props: [ 'titles', 'items', 'createUrl', 'showUrl', 'editUrl', 'deleteUrl', 'csrfToekn', 'sort', 'sortCol' ],
+        props: [ 'titles', 'items', 'createUrl', 'showUrl', 'editUrl', 'deleteUrl', 'csrfToekn', 'sort', 'sortCol', 'modal' ],
 
         computed: {
             list: function() {
@@ -63,9 +80,9 @@
                 
                 if (sort == 'desc') {
                     this.items.sort(function (a, b) {
-                        if (a[sortCol] < b[sortCol]) {
+                        if (Object.values(a)[sortCol] < Object.values(b)[sortCol]) {
                             return 1;
-                        } else if (a[sortCol] > b[sortCol]) {
+                        } else if (Object.values(a)[sortCol] > Object.values(b)[sortCol]) {
                             return -1;
                         }
     
@@ -73,24 +90,30 @@
                     });
                 } else {
                     this.items.sort(function (a, b) {
-                        if (a[sortCol] > b[sortCol]) {
+                        if (Object.values(a)[sortCol] > Object.values(b)[sortCol]) {
                             return 1;
-                        } else if (a[sortCol] < b[sortCol]) {
+                        } else if (Object.values(a)[sortCol] < Object.values(b)[sortCol]) {
                             return -1;
                         }
                         return 0;
                     });
                 }
 
-                return this.items.filter(res => {
-                    for (let i = 0; i < res.length; i++) {
-                        if ((res[i] + '').toLowerCase().indexOf(this.search.toLowerCase()) >= 0) {
-                            return true;
+                if (this.search) {
+                    return this.items.filter(res => {
+                        res = Object.values(res);
+                        
+                        for (let i = 0; i < res.length; i++) {
+                            if ((res[i] + '').toLowerCase().indexOf(this.search.toLowerCase()) >= 0) {
+                                return true;
+                            }
                         }
-                    }
 
-                    return false;
-                });
+                        return false;
+                    });
+                }
+
+                return this.items;
             }
         },
 

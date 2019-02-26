@@ -9,6 +9,23 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Vuex from 'Vuex';
+
+Vue.use(Vuex);
+
+// Vuex
+
+const store = new Vuex.Store({
+    state: {
+        item: {}
+    },
+    mutations: {
+        setItem(state, obj) {
+            state.item = obj;
+        }
+    }
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -23,7 +40,12 @@ Vue.component('vue-list-table', require('./components/ListTable.vue'));
 Vue.component('vue-breadcrumbs', require('./components/Breadcrumbs.vue'));
 Vue.component('vue-modal-content', require('./components/modal/Content.vue'));
 Vue.component('vue-modal-button', require('./components/modal/Button.vue'));
+Vue.component('vue-form', require('./components/Form.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store,
+    mounted: function () {
+        document.getElementById('app').style.display = "block";
+    }
 });

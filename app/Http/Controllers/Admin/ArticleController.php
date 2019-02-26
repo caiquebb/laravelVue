@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Article;
 
 class ArticleController extends Controller
 {
@@ -25,7 +26,9 @@ class ArticleController extends Controller
             ]
         ]);
 
-        return view('admin.articles.index', compact('breadcrumbs'));
+        $articles = json_encode(Article::select('id', 'title', 'description', 'publish_datetime')->get());
+
+        return view('admin.articles.index', compact('breadcrumbs', 'articles'));
     }
 
     /**
@@ -46,7 +49,11 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->all();
+
+        Article::create($attributes);
+
+        return redirect()->back();
     }
 
     /**

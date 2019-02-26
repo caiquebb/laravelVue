@@ -18,8 +18,8 @@ class AuthorController extends Controller
     {
         $breadcrumbs = json_encode([
             [
-                'title' => 'Home',
-                'url' => route('home')
+                'title' => 'Admin',
+                'url' => route('admin')
             ],
             [
                 'title' => 'Authors',

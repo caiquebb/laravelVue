@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\User;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $breadcrumbs = json_encode([
             [
-                'title' => 'Home',
+                'title' => 'Admin',
                 'url' => ''
             ]
         ]);
@@ -38,6 +38,6 @@ class HomeController extends Controller
             'authors' => User::where('author', 'S')->count()
         ];
 
-        return view('home', compact('breadcrumbs', 'totals'));
+        return view('admin', compact('breadcrumbs', 'totals'));
     }
 }

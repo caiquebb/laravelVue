@@ -23,8 +23,8 @@
             create-url="#create"
             show-url="/admin/articles/"
             edit-url="/admin/articles/"
-            delete-url="#delete"
-            csrf-toekn="1234567890987654">
+            delete-url="/admin/articles/"
+            csrf-toekn="{{ csrf_token() }}">
         </vue-list-table>
     </vue-panel>
 </vue-page>

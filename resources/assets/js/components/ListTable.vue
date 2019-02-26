@@ -22,7 +22,7 @@
                 <tr :key="item[0]" v-for="(item, index) in list">
                     <td :key="data" v-for="data in item">{{ data }}</td>
                     <td v-if="showUrl || editUrl || deleteUrl">
-                        <form :id="index" v-if="deleteUrl && csrfToekn" :action="deleteUrl" method="POST">
+                        <form :id="index" v-if="deleteUrl && csrfToekn" :action="deleteUrl + item.id" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" :value="csrfToekn">
                             

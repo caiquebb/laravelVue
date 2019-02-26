@@ -26,7 +26,18 @@ class ArticleController extends Controller
             ]
         ]);
 
-        $articles = Article::select('id', 'title', 'description', 'user_id', 'publish_datetime')->paginate(5);
+        $articles = Article::select(
+            'articles.id',
+            'articles.title',
+            'articles.description',
+            'users.name',
+            'articles.publish_datetime'
+        )->join(
+            'users',
+            'users.id',
+            '=',
+            'articles.user_id'
+        )->paginate(5);
 
         return view('admin.articles.index', compact('breadcrumbs', 'articles'));
     }

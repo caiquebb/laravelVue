@@ -23,23 +23,44 @@ class Article extends Model
 
     public static function listArticles($perPage)
     {
-        return self::select(
-            'articles.id',
-            'articles.title',
-            'articles.description',
-            'users.name',
-            'articles.publish_datetime'
-        )->join(
-            'users',
-            'users.id',
-            '=',
-            'articles.user_id'
-        )->paginate($perPage);
+        if (auth()->user()->admin == 'S') {
+            return self::select(
+                'articles.id',
+                'articles.title',
+                'articles.description',
+                'users.name',
+                'articles.publish_datetime'
+            )->join(
+                'users',
+                'users.id',
+                '=',
+                'articles.user_id'
+            )->orderBy(
+                'articles.id',
+                'desc'
+            )->paginate($perPage);
+        } else {
+            return auth()->user()->articles()->select(
+                'articles.id',
+                'articles.title',
+                'articles.description',
+                'users.name',
+                'articles.publish_datetime'
+            )->join(
+                'users',
+                'users.id',
+                '=',
+                'articles.user_id'
+            )->orderBy(
+                'articles.id',
+                'desc'
+            )->paginate($perPage);
+        }
     }
 
-    public static function listArticlesSite($perPage)
+    public static function listArticlesSite($perPage, $search = '')
     {
-        return self::select(
+        $query = self::select(
             'articles.id',
             'articles.title',
             'articles.description',
@@ -57,6 +78,22 @@ class Article extends Model
         )->orderBy(
             'publish_datetime',
             'desc'
-        )->paginate($perPage);
+        );
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->orWhere(
+                    'title',
+                    'like',
+                    "%{$search}%"
+                )->orWhere(
+                    'description',
+                    'like',
+                    "%{$search}%"
+                );
+            });
+        }
+
+        return $query->paginate($perPage);
     }
 }

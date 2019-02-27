@@ -3,6 +3,14 @@
 @section('content')
 <vue-page size="12">
     <vue-panel title="Articles">
+
+        <p>
+            <form action="{{ route('site') }}" class="form-inline text-center" method="get">
+                <input type="search" class="form-control" name="search" placeholder="Search..." value="{{ empty($search) ? '' : $search }}">
+                <button class="btn btn-info">Search</button>
+            </form>
+        </p>
+
         <div class="row">
             @foreach ($list as $article)
                 <vue-article-card

@@ -41,6 +41,7 @@ Vue.component('vue-breadcrumbs', require('./components/Breadcrumbs.vue'));
 Vue.component('vue-modal-content', require('./components/modal/Content.vue'));
 Vue.component('vue-modal-button', require('./components/modal/Button.vue'));
 Vue.component('vue-form', require('./components/Form.vue'));
+Vue.component('vue-article-card', require('./components/ArticleCard.vue'));
 
 import VueCkeditor from 'vue-ckeditor2';
 

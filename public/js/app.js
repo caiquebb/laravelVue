@@ -45134,7 +45134,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { class: _vm.defineColor }, [
-    _c("div", { staticClass: "panel-heading" }, [_vm._v(_vm._s(_vm.title))]),
+    _vm.title
+      ? _c("div", { staticClass: "panel-heading" }, [_vm._v(_vm._s(_vm.title))])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "panel-body" }, [_vm._t("default")], 2)
   ])

@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    <vue-panel title="User List">
+    <vue-panel title="Admin List">
         <vue-breadcrumbs :links="{{$breadcrumbs}}"></vue-breadcrumbs>
         
         <vue-list-table
@@ -21,10 +21,8 @@
             sort="asc"
             sort-col="2"
             create-url="#create"
-            show-url="/admin/users/"
-            edit-url="/admin/users/"
-            delete-url="/admin/users/"
-            csrf-toekn="{{ csrf_token() }}">
+            show-url="/admin/admins/"
+            edit-url="/admin/admins/" >
         </vue-list-table>
 
         <div align="center">
@@ -34,7 +32,7 @@
 </vue-page>
 
 <vue-modal-content id="createModal" title="Create">
-    <vue-form id="createForm" css="" action="{{ route('users.store') }}" method="post" enctype="" csrf-token="{{ csrf_token() }}">
+    <vue-form id="createForm" css="" action="{{ route('admins.store') }}" method="post" enctype="" csrf-token="{{ csrf_token() }}">
         <div class="form-group">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" class="form-control" placeholder="Name" value="{{ old('name') }}">
@@ -48,16 +46,16 @@
         <div class="form-group">
             <label for="admin">Admin</label>
             <select name="admin" id="admin" class="form-control">
-                <option {{ old('admin') && old('admin') == 'N' ? 'selected' : '' }} value="N">Não</option>
                 <option {{ old('admin') && old('admin') == 'S' ? 'selected' : '' }} value="S">Sim</option>
+                <option {{ old('admin') && old('admin') == 'N' ? 'selected' : '' }} value="N">Não</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="author">Author</label>
             <select name="author" id="author" class="form-control">
-                <option {{ old('author') && old('author') == 'N' ? 'selected' : '' }} value="N">Não</option>
                 <option {{ old('author') && old('author') == 'S' ? 'selected' : '' }} value="S">Sim</option>
+                <option {{ old('author') && old('author') == 'N' ? 'selected' : '' }} value="N">Não</option>
             </select>
         </div>
 
@@ -77,7 +75,7 @@
 </vue-modal-content>
 
 <vue-modal-content id="editModal" title="Edit">
-    <vue-form id="editForm" css="" :action="`/admin/users/${$store.state.item.id}`" method="put" enctype="" csrf-token="{{ csrf_token() }}">
+    <vue-form id="editForm" css="" :action="`/admin/admins/${$store.state.item.id}`" method="put" enctype="" csrf-token="{{ csrf_token() }}">
         <div class="form-group">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" class="form-control" v-model="$store.state.item.name" placeholder="Name">
@@ -87,7 +85,7 @@
             <label for="email">e-mail</label>
             <input id="email" name="email" type="email" class="form-control" v-model="$store.state.item.email" placeholder="e-mail">
         </div>
-        
+
         <div class="form-group">
             <label for="admin">Admin</label>
             <select name="admin" id="admin" class="form-control" v-model="$store.state.item.admin">

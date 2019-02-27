@@ -17,6 +17,10 @@
             <div class="col-md-4">
                 <vue-box amount="{{ $totals['authors'] }}" title="Authors" url="{{ route('authors.index') }}" color="red" icon="ion ion-person"></vue-box>
             </div>
+            
+            <div class="col-md-4">
+                <vue-box amount="{{ $totals['admins'] }}" title="Admins" url="{{ route('admins.index') }}" color="green" icon="ion ion-person"></vue-box>
+            </div>
         </div>
     </vue-panel>
 </vue-page>

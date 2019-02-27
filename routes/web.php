@@ -1,6 +1,7 @@
 <?php
 
 use App\Article;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,4 +38,5 @@ Route::middleware([ 'auth' ])->prefix('admin')->namespace('Admin')->group(functi
     Route::resource('articles', 'ArticleController');
     Route::resource('users', 'UserController');
     Route::resource('authors', 'AuthorController');
+    Route::resource('admins', 'AdminController');
 });

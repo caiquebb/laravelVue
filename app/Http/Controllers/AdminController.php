@@ -35,7 +35,8 @@ class AdminController extends Controller
         $totals = [
             'articles' => Article::count(),
             'users' => User::count(),
-            'authors' => User::where('author', 'S')->count()
+            'authors' => User::where('author', 'S')->count(),
+            'admins' => User::where('admin', 'S')->count(),
         ];
 
         return view('admin', compact('breadcrumbs', 'totals'));

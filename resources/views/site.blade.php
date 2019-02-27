@@ -8,7 +8,7 @@
                 <vue-article-card
                     sm="6"
                     md="4"
-                    link="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf45cOeLA9Yq0x80-AVQCq8fh1PiBDC1CcXMrlESj2dXi94YCOmQ"
+                    link="{{ route('article', [ $article->id, str_slug($article->title) ]) }}"
                     publish-date="{{ $article->publish_datetime }}"
                     author="{{ $article->author }}"
                     title="{{ $article->title}}"

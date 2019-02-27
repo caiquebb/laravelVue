@@ -31,12 +31,12 @@ Route::get('/article/{id}/{title?}', function ($id) {
 
 Auth::routes();
 
-Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/admin', 'AdminController@index')->name('admin')->middleware('can:isAuthor');
 
 Route::middleware([ 'auth' ])->prefix('admin')->namespace('Admin')->group(function () {
     
-    Route::resource('articles', 'ArticleController');
-    Route::resource('users', 'UserController');
-    Route::resource('authors', 'AuthorController');
-    Route::resource('admins', 'AdminController');
+    Route::resource('articles', 'ArticleController')->middleware('can:isAuthor');
+    Route::resource('users', 'UserController')->middleware('can:isAdmin');
+    Route::resource('authors', 'AuthorController')->middleware('can:isAdmin');
+    Route::resource('admins', 'AdminController')->middleware('can:isAdmin');
 });

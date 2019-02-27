@@ -1,5 +1,6 @@
 <?php
 
+use App\Article;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +13,9 @@
 */
 
 Route::get('/', function () {
-    return view('site');
+    $list = Article::listArticlesSite(3);
+    
+    return view('site', compact('list'));
 });
 
 Auth::routes();

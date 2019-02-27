@@ -62,7 +62,7 @@
         
         <div class="form-group">
             <label for="publish_datetime">Publish</label>
-            <input id="publish_datetime" name="publish_datetime" type="datetime-local" class="form-control" value="{{ old('publish_datetime') }}">
+            <input id="publish_datetime" name="publish_datetime" type="date" class="form-control" value="{{ old('publish_datetime') }}">
         </div>
     </vue-form>
 
@@ -105,7 +105,7 @@
         
         <div class="form-group">
             <label for="publish_datetime">Publish</label>
-            <input id="publish_datetime" name="publish_datetime" type="datetime-local" class="form-control" v-model="$store.state.item.publish_datetime">
+            <input id="publish_datetime" name="publish_datetime" type="date" class="form-control" v-model="$store.state.item.publish_datetime">
         </div>
     </vue-form>
 

@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 <tr :key="item[0]" v-for="(item, index) in list">
-                    <td :key="data" v-for="data in item">{{ data }}</td>
+                    <td :key="data" v-for="data in item">{{ data | dateFormat }}</td>
                     <td v-if="showUrl || editUrl || deleteUrl">
                         <form :id="index" v-if="deleteUrl && csrfToekn" :action="deleteUrl + item.id" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
@@ -130,6 +130,24 @@
                 } else {
                     this.sortData = 'asc';
                 }
+            }
+        },
+
+        filters: {
+            dateFormat: function (value) {
+                if (!value) {
+                    return '';
+                }
+
+                value = value.toString();
+
+                if (value.split('-').length == 3) {
+                    value = value.split('-');
+
+                    return `${value[2]}/${value[1]}/${value[0]}`
+                }
+
+                return value;
             }
         }
     }

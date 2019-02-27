@@ -52,7 +52,7 @@ class Article extends Model
             'articles.user_id'
         )->whereDate(
             'publish_datetime',
-            '<',
+            '<=',
             date('Y-m-d')
         )->orderBy(
             'publish_datetime',

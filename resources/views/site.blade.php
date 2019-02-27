@@ -11,8 +11,8 @@
                     link="{{ route('article', [ $article->id, str_slug($article->title) ]) }}"
                     publish-date="{{ $article->publish_datetime }}"
                     author="{{ $article->author }}"
-                    title="{{ $article->title}}"
-                    description="{{ $article->description }}">
+                    title="{{ str_limit($article->title, 25, '...') }}"
+                    description="{{ str_limit($article->description, 40, '...') }}">
                 </vue-article-card>
             @endforeach
         </div>
